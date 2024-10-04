@@ -4,7 +4,6 @@ import { TattooEvent } from './tattoo-event.object';
 @InputType()
 export class CreateArtistInput {
 
-
   @Field(() => String, { nullable: false })
   name: string;
 

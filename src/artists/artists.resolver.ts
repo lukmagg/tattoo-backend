@@ -1,21 +1,28 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { ArtistsService } from './artists.service';
 import { ArtistObject } from './dto/artist.object';
+import { CreateArtistInput } from './dto/create-artist.input';
 
 @Resolver(() => ArtistObject)
 export class ArtistsResolver {
-  constructor(private readonly usersService: ArtistsService) { }
+  constructor(private readonly artistService: ArtistsService) { }
+
+
+  @Mutation(() => ArtistObject)
+  createAuth(@Args('createArtistInput') createArtistInput: CreateArtistInput) {
+    return this.artistService.create(createArtistInput);
+  }
 
 
   @Query(() => [ArtistObject], { name: 'users' })
   findAll(): Promise<ArtistObject[]> {
-    return this.usersService.findAll();
+    return this.artistService.findAll();
   }
 
 
   @Query(() => ArtistObject, { name: 'user' })
   findOne(@Args('id', { type: () => ID }) id: string): Promise<ArtistObject> {
-    return this.usersService.findOne(id);
+    return this.artistService.findOne(id);
   }
 
   // @Mutation(() => ArtistObject)

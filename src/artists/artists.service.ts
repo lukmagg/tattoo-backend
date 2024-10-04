@@ -5,6 +5,7 @@ import { SignupInput } from 'src/auth/dto/signup.input';
 import { Artist, ArtistModel } from './schemas/artist.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
+import { CreateArtistInput } from './dto/create-artist.input';
 
 @Injectable()
 export class ArtistsService {
@@ -13,26 +14,21 @@ export class ArtistsService {
 
   constructor(
     @InjectModel(Artist.name)
-    private readonly userRepository: ArtistModel,
+    private readonly artistRepository: ArtistModel,
   ) { }
 
-  async create(signupInput: SignupInput): Promise<ArtistObject> {
+  async create(createArtistInput: CreateArtistInput): Promise<ArtistObject> {
     try {
-      const encryptedPassword = await bcrypt.hash(signupInput.password, 10)
+      const artist = await this.artistRepository.create(createArtistInput);
 
-      const user = await this.userRepository.create({
-        ...signupInput,
-        password: encryptedPassword
-      });
-
-      return user;
+      return artist;
     } catch (error) {
       this.handleDBErrors(error)
     }
   }
 
   async findAll(): Promise<ArtistObject[]> {
-    return []
+    return await this.artistRepository.find()
   }
 
   async findOne(id: string): Promise<ArtistObject> {
@@ -40,27 +36,27 @@ export class ArtistsService {
   }
 
   async findOneByEmail(email: string): Promise<ArtistObject> {
-    const user = await this.userRepository.findOne({ email })
-    if (!user) {
+    const artist = await this.artistRepository.findOne({ email })
+    if (!artist) {
       this.handleDBErrors({
         code: 'error-001',
         detail: 'Bad email or password'
       })
     }
-    return user
+    return artist
   }
 
   async findOneById(id: string) {
 
-    const user = await this.userRepository.findById(id)
+    const artist = await this.artistRepository.findById(id)
 
-    if (!user) {
+    if (!artist) {
       this.handleDBErrors({
         code: 'error-001',
         detail: 'id not found'
       })
     }
-    return user
+    return artist
   }
 
 
