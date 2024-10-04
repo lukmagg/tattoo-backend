@@ -6,6 +6,7 @@ import { User, UserModel } from './schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 
+
 @Injectable()
 export class UsersService {
 
@@ -15,6 +16,8 @@ export class UsersService {
     @InjectModel(User.name)
     private readonly userRepository: UserModel,
   ) { }
+
+
 
   async create(signupInput: SignupInput): Promise<UserObject> {
     try {
@@ -32,7 +35,7 @@ export class UsersService {
   }
 
   async findAll(): Promise<UserObject[]> {
-    return []
+    return await this.userRepository.find()
   }
 
   async findOne(id: string): Promise<UserObject> {

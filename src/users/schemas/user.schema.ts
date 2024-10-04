@@ -25,6 +25,9 @@ export class User {
   @Prop({ type: [TattooEvent], required: false })
   eventList: TattooEvent[];
 
+  @Prop({ type: String, required: false, trim: true })
+  description: string;
+
   @Prop({ type: Boolean, required: true, default: true })
   isActive: boolean;
 

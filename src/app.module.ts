@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { TwilioModule } from './providers/twilio/twilio.module';
+import { OtpModule } from './otp/otp.module';
 
 @Module({
   imports: [
@@ -23,8 +25,9 @@ import { AuthModule } from './auth/auth.module';
     }),
 
     UsersModule,
-
     AuthModule,
+    OtpModule,
+    TwilioModule
 
   ],
   providers: [],
