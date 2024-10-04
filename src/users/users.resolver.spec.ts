@@ -16,4 +16,9 @@ describe('UsersResolver', () => {
   it('should be defined', () => {
     expect(resolver).toBeDefined();
   });
+
+  it('should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
 });
+
