@@ -7,7 +7,7 @@ import { SigninInput } from './dto/signin.input';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { UserObject } from 'src/users/dto/user.object';
+import { UserObject } from './../users/dto/user.object';
 import { ValidRoles } from './enums/valid-roles.enum';
 
 @Resolver(() => Auth)

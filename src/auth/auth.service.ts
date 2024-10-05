@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthResponseObject } from './dto/auth-response';
 import { SignupInput } from './dto/signup.input';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from './../users/users.service'
 import { SigninInput } from './dto/signin.input';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -37,8 +37,6 @@ export class AuthService {
     }
 
     user.password = ''
-
-    console.log(user)
 
     const token = this.jwtService.sign({ id: user.id, roles: user.roles })
 
