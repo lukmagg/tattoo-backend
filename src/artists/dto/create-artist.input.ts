@@ -1,9 +1,8 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { TattooEvent } from './tattoo-event.object';
+import { TattooEventInput } from './tattoo-event.input';
 
 @InputType()
 export class CreateArtistInput {
-
   @Field(() => String, { nullable: false })
   name: string;
 
@@ -11,16 +10,16 @@ export class CreateArtistInput {
   description: string;
 
   @Field(() => String, { nullable: false })
-  color: string;
+  instagram: string;
 
   @Field(() => String, { nullable: false })
-  email: string;
+  color: string;
 
-  @Field(() => [TattooEvent], { nullable: true })
-  eventList: TattooEvent[];
+  @Field(() => [TattooEventInput], { nullable: true })
+  eventList: TattooEventInput[];
 
   @Field(() => Boolean, {
-    nullable: false,
+    nullable: true,
   })
   isActive: boolean;
 }

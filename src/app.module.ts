@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { TwilioModule } from './providers/twilio/twilio.module';
 import { OtpModule } from './otp/otp.module';
+import { ArtistsModule } from './artists/artists.module';
 
 @Module({
   imports: [
@@ -23,14 +24,12 @@ import { OtpModule } from './otp/otp.module';
       }),
       inject: [ConfigService],
     }),
-
+    ArtistsModule,
     UsersModule,
     AuthModule,
     OtpModule,
-    TwilioModule
-
+    TwilioModule,
   ],
   providers: [],
-
 })
-export class AppModule { }
+export class AppModule {}

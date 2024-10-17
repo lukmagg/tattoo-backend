@@ -4,90 +4,85 @@ import { Model, Types } from 'mongoose';
 import { Artist } from './schemas/artist.schema';
 import { getModelToken } from '@nestjs/mongoose';
 
-
 const mockArtistArray = [
   {
     _id: '1',
     name: 'testuser',
-    email: 'testuser@example.com',
     description: 'description',
     color: 'red',
     eventList: [],
-    isActive: true
+    isActive: true,
   },
   {
     _id: '2',
     name: 'testuser2',
-    email: 'test2@example.com',
     description: 'description',
     color: 'blue',
     eventList: [],
-    isActive: true
-  }
-]
+    isActive: true,
+  },
+];
 
 const newArtist = {
   name: 'test',
-  email: 'test@test.com',
   description: 'description',
   color: 'blue',
   eventList: [],
-  isActive: true
-}
+  isActive: true,
+};
 
 const mockArtist = {
-  _id: new Types.ObjectId(),  // Simula un ObjectId de Mongoose
+  _id: new Types.ObjectId(), // Simula un ObjectId de Mongoose
   name: 'testuser',
-  email: 'testuser@example.com',
-  description: 'description',  // Esto asume que el password ya está hasheado
+  description: 'description', // Esto asume que el password ya está hasheado
   color: 'blue',
   eventList: [],
-  isActive: true
+  isActive: true,
 } as any;
 
 describe('Testing Artists service', () => {
   let service: ArtistsService;
-  let artistRepository: Model<Artist>
+  let artistRepository: Model<Artist>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ArtistsService, {
-        provide: getModelToken(Artist.name),
-        useValue: {
-          find: jest.fn(), // Mockea el metodo `find` de Mongoose
-          create: jest.fn(), // Mockea el metodo `create` de Mongoose
+      providers: [
+        ArtistsService,
+        {
+          provide: getModelToken(Artist.name),
+          useValue: {
+            find: jest.fn(), // Mockea el metodo `find` de Mongoose
+            create: jest.fn(), // Mockea el metodo `create` de Mongoose
+          },
         },
-      }],
-    }).compile()
+      ],
+    }).compile();
 
-    service = module.get<ArtistsService>(ArtistsService)
-    artistRepository = module.get<Model<Artist>>(getModelToken(Artist.name))
-  })
+    service = module.get<ArtistsService>(ArtistsService);
+    artistRepository = module.get<Model<Artist>>(getModelToken(Artist.name));
+  });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
   it('Should return an array of artists', async () => {
+    jest.spyOn(artistRepository, 'find').mockResolvedValue(mockArtistArray);
 
-    jest.spyOn(artistRepository, 'find').mockResolvedValue(mockArtistArray)
-
-    const artists = await service.findAll()
+    const artists = await service.findAll();
 
     expect(artists).toEqual(mockArtistArray);
-  })
+  });
 
   it('Shoul create a new artist', async () => {
+    jest.spyOn(artistRepository, 'create').mockResolvedValue(mockArtist);
 
-    jest.spyOn(artistRepository, 'create').mockResolvedValue(mockArtist)
-
-
-    const artist = await service.create(newArtist)
+    const artist = await service.create(newArtist);
 
     expect(artistRepository.create).toHaveBeenCalledWith({
       ...newArtist,
     });
 
-    expect(artist).toEqual(mockArtist)
-  })
+    expect(artist).toEqual(mockArtist);
+  });
 });

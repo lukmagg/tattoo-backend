@@ -4,14 +4,12 @@ import { UserObject } from './dto/user.object';
 
 @Resolver(() => UserObject)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) { }
-
+  constructor(private readonly usersService: UsersService) {}
 
   @Query(() => [UserObject], { name: 'users' })
   findAll(): Promise<UserObject[]> {
     return this.usersService.findAll();
   }
-
 
   @Query(() => UserObject, { name: 'user' })
   findOne(@Args('id', { type: () => ID }) id: string): Promise<UserObject> {

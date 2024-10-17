@@ -6,14 +6,14 @@ export type OtpModel = Model<Otp>;
 
 @Schema()
 export class Otp {
-    @Prop({ required: true })
-    code: number;
+  @Prop({ required: true })
+  code: number;
 
-    @Prop({ required: true })
-    phone: string;
+  @Prop({ required: true })
+  phone: string;
 
-    @Prop({ required: true })
-    expire: Date;
+  @Prop({ required: true })
+  expire: Date;
 }
 
 export const OtpSchema = SchemaFactory.createForClass(Otp);

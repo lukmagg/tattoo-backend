@@ -7,8 +7,8 @@ import { Artist, ArtistSchema } from './schemas/artist.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Artist.name, schema: ArtistSchema }])
+    MongooseModule.forFeature([{ name: Artist.name, schema: ArtistSchema }]),
   ],
   providers: [ArtistsResolver, ArtistsService, ArtistObject],
 })
-export class ArtistsModule { }
+export class ArtistsModule {}

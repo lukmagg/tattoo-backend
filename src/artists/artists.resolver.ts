@@ -7,20 +7,17 @@ import { CreateArtistInput } from './dto/create-artist.input';
 export class ArtistsResolver {
   constructor(private readonly artistService: ArtistsService) { }
 
-
-  @Mutation(() => ArtistObject)
-  createAuth(@Args('createArtistInput') createArtistInput: CreateArtistInput) {
+  @Mutation(() => ArtistObject, { name: 'createArtist' })
+  create(@Args('createArtistInput') createArtistInput: CreateArtistInput) {
     return this.artistService.create(createArtistInput);
   }
 
-
-  @Query(() => [ArtistObject], { name: 'users' })
+  @Query(() => [ArtistObject], { name: 'artists' })
   findAll(): Promise<ArtistObject[]> {
     return this.artistService.findAll();
   }
 
-
-  @Query(() => ArtistObject, { name: 'user' })
+  @Query(() => ArtistObject, { name: 'artist' })
   findOne(@Args('id', { type: () => ID }) id: string): Promise<ArtistObject> {
     return this.artistService.findOne(id);
   }

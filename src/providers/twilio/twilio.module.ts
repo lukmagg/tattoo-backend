@@ -4,8 +4,8 @@ import TwilioController from './twilio.controller';
 import { OtpModule } from 'src/otp/otp.module';
 
 @Module({
-    imports: [OtpModule],
-    controllers: [TwilioController],
-    providers: [TwilioService],
+  imports: [OtpModule],
+  controllers: [TwilioController],
+  providers: [TwilioService],
 })
-export class TwilioModule { }
+export class TwilioModule {}

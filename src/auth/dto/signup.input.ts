@@ -3,7 +3,6 @@ import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 
 @InputType()
 export class SignupInput {
-
   @Field(() => String)
   @IsEmail()
   email: string;

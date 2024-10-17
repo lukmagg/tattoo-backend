@@ -11,7 +11,7 @@ services:
     restart: always
 
   mongoex:
-    image: mongo-express
+    image: mongo-express:1.0.2
     container_name: mongoex-1009
     environment:
       - ME_CONFIG_OPTIONS_EDITORTHEME=monokai
