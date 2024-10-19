@@ -19,6 +19,8 @@ export class ArtistsService {
 
       return artist;
     } catch (error) {
+      console.log('createArtistInput');
+      console.log(createArtistInput);
       handleDBErrors(error, 'ArtistsService');
     }
   }
