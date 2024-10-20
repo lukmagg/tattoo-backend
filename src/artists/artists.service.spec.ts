@@ -11,6 +11,7 @@ const mockArtistArray = [
     description: 'description',
     color: 'red',
     eventList: [],
+    instagram: 'https://www.instagram.com/luk_magg/',
     isActive: true,
   },
   {
@@ -19,6 +20,7 @@ const mockArtistArray = [
     description: 'description',
     color: 'blue',
     eventList: [],
+    instagram: 'https://www.instagram.com/luk_magg/',
     isActive: true,
   },
 ];
@@ -28,6 +30,7 @@ const newArtist = {
   description: 'description',
   color: 'blue',
   eventList: [],
+  instagram: 'https://www.instagram.com/luk_magg/',
   isActive: true,
 };
 

@@ -4,7 +4,7 @@ import { ArtistObject } from './dto/artist.object';
 import { Artist, ArtistModel } from './schemas/artist.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateArtistInput } from './dto/create-artist.input';
-import { handleDBErrors } from 'src/lib/handleDBErrors';
+import { handleDBErrors } from '../lib/handleDBErrors';
 
 @Injectable()
 export class ArtistsService {

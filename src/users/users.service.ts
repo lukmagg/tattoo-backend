@@ -5,7 +5,7 @@ import { SignupInput } from 'src/auth/dto/signup.input';
 import { User, UserModel } from './schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import { handleDBErrors } from 'src/lib/handleDBErrors';
+import { handleDBErrors } from '../lib/handleDBErrors';
 
 @Injectable()
 export class UsersService {
