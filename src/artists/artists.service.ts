@@ -48,12 +48,36 @@ export class ArtistsService {
     return artist;
   }
 
-  // async update(
-  //   id: number,
-  //   updateArtistInput: UpdateArtistInput,
-  // ): Promise<ArtistObject> {
-  //   throw new Error('not yet implemented');
-  // }
+  async update(
+    id: string,
+    updateArtistInput: UpdateArtistInput,
+  ): Promise<ArtistObject> {
+    const doc = await this.artistRepository.findOneAndUpdate(
+      { _id: id },
+      updateArtistInput,
+      {
+        new: true,
+        upsert: true, // Make this update into an upsert
+      },
+    );
+    return doc;
+  }
+
+  async activate(
+    id: string,
+  ): Promise<ArtistObject> {
+    const doc = await this.artistRepository.findOneAndUpdate(
+      { _id: id },
+      { isActive: true },
+      {
+        new: true,
+        upsert: true, // Make this update into an upsert
+      },
+    );
+    return doc;
+  }
+
+
 
   // async block(id: string): Promise<Artist> {
   //   throw new Error('not yet implemented')

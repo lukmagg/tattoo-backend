@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { ArtistsService } from './artists.service';
 import { ArtistObject } from './dto/artist.object';
 import { CreateArtistInput } from './dto/create-artist.input';
+import { UpdateArtistInput } from './dto/update-artist.input';
 
 @Resolver(() => ArtistObject)
 export class ArtistsResolver {
@@ -22,13 +23,24 @@ export class ArtistsResolver {
     return this.artistService.findOne(id);
   }
 
-  // @Mutation(() => ArtistObject)
-  // updateArtist(@Args('updateArtistInput') updateArtistInput: UpdateArtistInput) {
-  //   return this.usersService.update(updateArtistInput.id, updateArtistInput);
-  // }
+  @Mutation(() => ArtistObject)
+  updateArtist(
+    @Args('updateArtistInput') updateArtistInput: UpdateArtistInput,
+  ) {
+    return this.artistService.update(updateArtistInput.id, updateArtistInput);
+  }
+
+
+  @Mutation(() => ArtistObject)
+  activateArtist(@Args('id', { type: () => ID }) id: string): Promise<ArtistObject> {
+    return this.artistService.activate(id);
+  }
+
 
   // @Mutation(() => ArtistObject)
   // blockArtist(@Args('id', { type: () => ID }) id: string): Promise<ArtistObject> {
   //   return this.usersService.block(id);
   // }
+
+
 }
