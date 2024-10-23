@@ -37,10 +37,10 @@ export class ArtistsResolver {
   }
 
 
-  // @Mutation(() => ArtistObject)
-  // blockArtist(@Args('id', { type: () => ID }) id: string): Promise<ArtistObject> {
-  //   return this.usersService.block(id);
-  // }
+  @Mutation(() => ArtistObject)
+  deactivateArtist(@Args('id', { type: () => ID }) id: string): Promise<ArtistObject> {
+    return this.artistService.deactivate(id);
+  }
 
 
 }

@@ -71,7 +71,6 @@ export class ArtistsService {
       { isActive: true },
       {
         new: true,
-        upsert: true, // Make this update into an upsert
       },
     );
     return doc;
@@ -79,7 +78,16 @@ export class ArtistsService {
 
 
 
-  // async block(id: string): Promise<Artist> {
-  //   throw new Error('not yet implemented')
-  // }
+  async deactivate(
+    id: string,
+  ): Promise<ArtistObject> {
+    const doc = await this.artistRepository.findOneAndUpdate(
+      { _id: id },
+      { isActive: false },
+      {
+        new: true,
+      },
+    );
+    return doc;
+  }
 }
